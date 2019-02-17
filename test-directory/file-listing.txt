@@ -14,5 +14,5 @@
 
 NAME          |  DATE                 |  SIZE      |  DESCRIPTION                           
 movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home movies of the family on holidays.
-document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Text file for the test                
+document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Document with important information.                
 image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                   
