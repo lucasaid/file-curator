@@ -7,7 +7,7 @@ Example Output: [file-listing.txt](https://github.com/lucasaid/file-curator/blob
 ## USAGE
 
 Clone or download repo into a directory of your choice.  
-Run `npm link` to link package globally to run from the directory you wish. (NOTE: need to update this so you can install via npm globally)
+Run `npm link` to link package globally to run from the directory you wish. (NOTE: I need to update this so you can install via npm globally instead of doing this)
 
 To uninstall just run `npm unlink` in code directory.
 
