@@ -1,0 +1,21 @@
+{
+  "name": "file-curator",
+  "version": "1.0.0",
+  "description": "Generate file list txt file of directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Lucas",
+  "license": "MIT",
+  "bin": {
+    "file-curator": "./cli.js"
+  },
+  "dependencies": {
+    "columnify": "^1.5.4",
+    "dateformat": "^3.0.3",
+    "junk": "^2.1.0",
+    "readline-sync": "^1.4.9",
+    "word-wrap": "^1.2.3"
+  }
+}

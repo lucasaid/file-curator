@@ -1,0 +1,18 @@
+*****************************************************************
+*                                                               *
+*      FILE CREATED: 2019-02-17 10:55:03                        *
+*                                                               *
+*      TOTAL SIZE: 96 bytes                                     *
+*                                                               *
+*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
+*      t-directory                                              *
+*                                                               *
+*      This is a test directory to show you how the             *
+*      outputted file will look like.                           *
+*                                                               *
+*****************************************************************
+
+NAME          |  DATE                 |  SIZE      |  DESCRIPTION                           
+movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home movies of the family on holidays.
+document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Text file for the test                
+image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                   
