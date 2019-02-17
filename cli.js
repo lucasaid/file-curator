@@ -86,6 +86,7 @@ if (!help) {
     var fileExists = readlineSync.question(
       `\x1b[31mWARING: ${FILELISTNAME} already exists, continue? (y/n) \x1b[0m`
     );
+    fileExists = "n";
   }
   let fileCount = 0;
   if (
