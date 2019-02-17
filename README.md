@@ -2,7 +2,7 @@
 
 A Node script that generates a list of files in the current directory and stores it in a text file with added descriptions with each file.
 
-Example Output: [file-listing.txt]("https://github.com/lucasaid/file-curator/tree/master/text-directory/file-listing.txt")
+Example Output: [file-listing.txt](https://github.com/lucasaid/file-curator/blob/master/test-directory/file-listing.txt)
 
 ## USAGE
 
