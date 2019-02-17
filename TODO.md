@@ -1,5 +1,6 @@
 # TODO
 
+- Handle multiline file names
 - Remove pipes | in user comment
 - Clean up code
 - Check if on Mac, if not skip applescript commands
