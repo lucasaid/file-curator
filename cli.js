@@ -46,14 +46,12 @@ if (!help) {
     fileLines.map(function(fileLine) {
       let fileLineArray = fileLine.split("  |  ");
       let name = fileLineArray[0].trim();
-      if (previous === null && previous !== name && previous !== "") {
-        previous = name;
-      }
       let description = fileLineArray[3].trim();
-      if (name == "") {
-        fileList[previous] = fileList[previous] + description;
-      } else {
+      if (name !== "") {
+        previous = name;
         fileList[name] = description;
+      } else {
+        fileList[previous] = fileList[previous] + " " + description;
       }
     });
     return fileList;
