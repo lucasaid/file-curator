@@ -42,9 +42,19 @@ if (!help) {
     });
     fileLines.splice(0, headerIndex + 1);
     fileList = [];
+    let previous = null;
     fileLines.map(function(fileLine) {
       let fileLineArray = fileLine.split("  |  ");
-      fileList[fileLineArray[0].trim()] = fileLineArray[3].trim();
+      let name = fileLineArray[0].trim();
+      if (previous === null && previous !== name && previous !== "") {
+        previous = name;
+      }
+      let description = fileLineArray[3].trim();
+      if (name == "") {
+        fileList[previous] = fileList[previous] + description;
+      } else {
+        fileList[name] = description;
+      }
     });
     return fileList;
   }
@@ -86,9 +96,6 @@ if (!help) {
     var fileExists = readlineSync.question(
       `\x1b[31mWARING: ${FILELISTNAME} already exists, continue? (y/n) \x1b[0m`
     );
-    if (!force && !emptyComment) {
-      fileExists = "n";
-    }
   }
   let fileCount = 0;
   if (
