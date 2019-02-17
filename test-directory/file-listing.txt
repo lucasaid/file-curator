@@ -4,8 +4,7 @@
 *                                                               *
 *      TOTAL SIZE: 96 bytes                                     *
 *                                                               *
-*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
-*      t-directory                                              *
+*      FULL PATH: /code/file-curator/test-directory             *
 *                                                               *
 *      This is a test directory to show you how the             *
 *      outputted file will look like.                           *
