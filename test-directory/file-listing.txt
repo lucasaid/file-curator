@@ -1,24 +1,17 @@
 *****************************************************************
 *                                                               *
-*      FILE CREATED: 2019-02-17 11:52:13                        *
+*      FILE CREATED: 2019-02-18 11:00:33                        *
 *                                                               *
 *      TOTAL SIZE: 96 bytes                                     *
 *                                                               *
-*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
-*      t-directory                                              *
+*      FULL PATH: /code/file-curator/test-directory             *
 *                                                               *
 *      This is a test directory to show you how the             *
 *      outputted file will look like.                           *
 *                                                               *
 *****************************************************************
 
-NAME          |  DATE                 |  SIZE      |  DESCRIPTION                                       
-movies/       |  2019-02-16 21:16:04  |  96 bytes  |  You'll shoot your eye out! - Taiwanese manfinishes
-              |                       |            |  WoW - Alliance/Horde mosaic  - Lookingahead at    
-              |                       |            |  Final Fantasy XIV - Responses abouthomogenization 
-              |                       |            |  and balance - Is WoW becoming toomuch like a      
-              |                       |            |  console game? - How do you play yourclass? - Mod  
-              |                       |            |  of the - cast: Pet Leash - Podcastfeatured        
-              |                       |            |  question - Photowalk                              
-document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Document with important information.              
-image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                               
+NAME          |  DATE                 |  SIZE      |  DESCRIPTION                         
+movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home movies directory.              
+document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Document with important information.
+image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                 
