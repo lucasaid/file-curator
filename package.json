@@ -1,7 +1,7 @@
 {
   "name": "file-curator",
   "version": "1.0.0",
-  "description": "Generate file list txt file of directory",
+  "description": "Generate list of files in a text file of directory",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

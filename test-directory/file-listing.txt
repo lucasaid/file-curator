@@ -1,11 +1,10 @@
 *****************************************************************
 *                                                               *
-*      FILE CREATED: 2019-02-20 13:13:35                        *
+*      FILE CREATED: 2019-02-20 16:47:28                        *
 *                                                               *
 *      TOTAL SIZE: 96 bytes                                     *
 *                                                               *
-*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
-*      t-directory                                              *
+*      FULL PATH: /code/file-curator/test-directory             *
 *                                                               *
 *      This is a test directory to show you how the             *
 *      outputted file will look like.                           *

@@ -19,6 +19,7 @@ Run `file-curator` in current directory you wish to catalogue and you will be pr
 `-f`: Force re-write for all files.  
 `-u`: If there is description currently assigned to the file, skip asking to overwrite and use current.  
 `-u`: Generates empty comment and just generates file list.  
+`-a`: Sync with apple finder.
 `-help`: Brings up help text.
 
 #### Mac Users Note:
