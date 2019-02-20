@@ -19,6 +19,7 @@ const force = process.argv.indexOf("-f") > -1 ? true : false;
 const useCurrent = process.argv.indexOf("-u") > -1 ? true : false;
 const emptyComment = process.argv.indexOf("-e") > -1 ? true : false;
 const help = process.argv.indexOf("-help") > -1 ? true : false;
+const apple = process.argv.indexOf("-a") > -1 ? true : false;
 
 const nameIndex = process.argv.indexOf("-n");
 
@@ -104,7 +105,7 @@ if (!help) {
     let parentComment = execSync(
       `mdls -name kMDItemFinderComment -raw "${CURRENT}"`
     ).toString();
-    if (!parentComment.length || parentComment === "(null)") {
+    if ((!parentComment.length || parentComment === "(null)") && apple) {
       parentComment = execSync(
         `sh ${__dirname}/applescript/get_comment.sh "${CURRENT}"`
       ).toString();
@@ -164,7 +165,7 @@ if (!help) {
       let termComment = execSync(
         `mdls -name kMDItemFinderComment -raw "${file.path}"`
       ).toString();
-      if (!termComment.length || termComment === "(null)") {
+      if ((!termComment.length || termComment === "(null)") && apple) {
         termComment = execSync(
           `sh ${__dirname}/applescript/get_comment.sh "${file.path}"`
         ).toString();
@@ -205,16 +206,18 @@ if (!help) {
       if (emptyComment) {
         termComment = "";
       }
-      execSync(
-        `xattr -w com.apple.metadata:kMDItemFinderComment "${termComment}" "${
-          file.path
-        }"`
-      );
-      execSync(
-        `sh ${__dirname}/applescript/update_finder.sh "${
-          file.path
-        }" "${termComment}"`
-      );
+      if (apple) {
+        execSync(
+          `xattr -w com.apple.metadata:kMDItemFinderComment "${termComment}" "${
+            file.path
+          }"`
+        );
+        execSync(
+          `sh ${__dirname}/applescript/update_finder.sh "${
+            file.path
+          }" "${termComment}"`
+        );
+      }
       data.push(genLine(file, termComment));
       if (overWrite && !emptyComment) {
         console.log("\x1b[32m✔ New File details are: ", termComment, "\x1b[0m");
@@ -285,6 +288,10 @@ if (!help) {
     {
       option: "-e",
       description: "Generates empty comment and just generates file list."
+    },
+    {
+      option: "-a",
+      description: "Sync with apple finder."
     },
     {
       option: "-help",

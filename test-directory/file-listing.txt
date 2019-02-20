@@ -1,10 +1,11 @@
 *****************************************************************
 *                                                               *
-*      FILE CREATED: 2019-02-18 11:00:33                        *
+*      FILE CREATED: 2019-02-20 13:13:35                        *
 *                                                               *
 *      TOTAL SIZE: 96 bytes                                     *
 *                                                               *
-*      FULL PATH: /code/file-curator/test-directory             *
+*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
+*      t-directory                                              *
 *                                                               *
 *      This is a test directory to show you how the             *
 *      outputted file will look like.                           *
@@ -12,6 +13,6 @@
 *****************************************************************
 
 NAME          |  DATE                 |  SIZE      |  DESCRIPTION                         
-movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home movies directory.              
+movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home Movies Directory               
 document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Document with important information.
 image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                 
