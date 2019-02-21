@@ -19,4 +19,4 @@ Run `file-curator` in current directory you wish to catalogue and you will be pr
 
 #### Mac Users Note:
 
-If on a Mac OS, the script will attempt to grab any comments attached to the file using finder.
+If on a Mac OS, the script will attempt to grab and set any comments attached to the file using finder if the `-a` flag is set.
