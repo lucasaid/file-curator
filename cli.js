@@ -8,6 +8,7 @@ const wordwrap = require("word-wrap");
 const { ignored } = require("./ignored.json");
 const readlineSync = require("readline-sync");
 const { execSync } = require("child_process");
+const fsUtils = require("nodejs-fs-utils");
 const columnify = require("columnify");
 
 var data = [];
@@ -148,8 +149,14 @@ if (!help) {
         const isDir = stats.isDirectory();
         let date = new Date(util.inspect(stats.mtime));
         date = dateFormat(date, "yyyy-mm-dd H:MM:ss");
-        totalSize += stats.size;
         let size = formatSizeUnits(stats.size);
+        if (isDir) {
+          size = fsUtils.fsizeSync(path);
+          totalSize += size;
+          size = formatSizeUnits(size);
+        } else {
+          totalSize += stats.size;
+        }
         if (size)
           return {
             name: isDir ? item + "/" : item,

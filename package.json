@@ -1,6 +1,6 @@
 {
   "name": "file-curator",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Generate list of files in a text file of directory",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "columnify": "^1.5.4",
     "dateformat": "^3.0.3",
     "junk": "^2.1.0",
+    "nodejs-fs-utils": "^1.1.2",
     "readline-sync": "^1.4.9",
     "word-wrap": "^1.2.3"
   }
