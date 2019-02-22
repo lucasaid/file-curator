@@ -15,6 +15,7 @@ Run `file-curator` in current directory you wish to catalogue and you will be pr
 `-u`: If there is description currently assigned to the file, skip asking to overwrite and use current.  
 `-u`: Generates empty comment and just generates file list.  
 `-a`: Sync with apple finder.  
+`-d`: Calculate directory file size, can be slow depending on how big the directory is.
 `-help`: Brings up help text.
 
 #### Mac Users Note:

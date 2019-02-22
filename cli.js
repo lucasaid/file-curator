@@ -21,6 +21,7 @@ const useCurrent = process.argv.indexOf("-u") > -1 ? true : false;
 const emptyComment = process.argv.indexOf("-e") > -1 ? true : false;
 const help = process.argv.indexOf("-help") > -1 ? true : false;
 const apple = process.argv.indexOf("-a") > -1 ? true : false;
+const dirsize = process.argv.indexOf("-d") > -1 ? true : false;
 
 const nameIndex = process.argv.indexOf("-n");
 
@@ -150,7 +151,7 @@ if (!help) {
         let date = new Date(util.inspect(stats.mtime));
         date = dateFormat(date, "yyyy-mm-dd H:MM:ss");
         let size = formatSizeUnits(stats.size);
-        if (isDir) {
+        if (isDir && dirsize) {
           size = fsUtils.fsizeSync(path);
           totalSize += size;
           size = formatSizeUnits(size);
@@ -299,6 +300,11 @@ if (!help) {
     {
       option: "-a",
       description: "Sync with apple finder."
+    },
+    {
+      option: "-d",
+      description:
+        "Calculate directory file size, can be slow depending on how big the directory is."
     },
     {
       option: "-help",
