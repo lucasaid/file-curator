@@ -6,3 +6,4 @@
 - Clean up code
 - Move exec commands to functions
 - Add total number of files and directorys to overview
+- Add file count for directories?

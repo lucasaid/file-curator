@@ -59,6 +59,20 @@ if (!help) {
     });
     return fileList;
   }
+  function getDescription(file) {
+    let fileData = fs.readFileSync(file, "utf8");
+    let desc = fileData.match(/DESCRIPTION([\S\s]*?)\*\*\*/gi);
+    let fileLineArray = desc[0].split(/\*\n/gi);
+    fileLineArray.shift();
+    fileLineArray.pop();
+    let newDesc = fileLineArray.map(function(line) {
+      line = line.replace(/\*/g, "");
+      line = line.trim();
+      return line;
+    });
+    newDesc = newDesc.join(" ");
+    return newDesc;
+  }
 
   function compareFiles(a, b) {
     return b.isDir - a.isDir || a.name > b.name ? 1 : -1;
@@ -104,21 +118,46 @@ if (!help) {
     (typeof fileExists !== "undefined" &&
       (fileExists.toLowerCase() === "y" || fileExists.toLowerCase() === "yes"))
   ) {
-    let parentComment = execSync(
-      `mdls -name kMDItemFinderComment -raw "${CURRENT}"`
-    ).toString();
-    if ((!parentComment.length || parentComment === "(null)") && apple) {
+    let parentComment = "";
+    if (apple) {
       parentComment = execSync(
-        `sh ${__dirname}/applescript/get_comment.sh "${CURRENT}"`
+        `mdls -name kMDItemFinderComment -raw "${CURRENT}"`
       ).toString();
+      if (!parentComment.length || parentComment === "(null)") {
+        parentComment = execSync(
+          `sh ${__dirname}/applescript/get_comment.sh "${CURRENT}"`
+        ).toString();
+      }
     }
     if (!parentComment.length || parentComment === "(null)") {
+      parentComment = getDescription(`${CURRENT}/${FILELISTNAME}`);
+    }
+    overWriteMain = false;
+    if (parentComment.length && parentComment !== "(null)" && !useCurrent) {
+      var overWriteMainQ = readlineSync.question(
+        `\x1b[31mWARING: Directory comment already exists, would you like to overwite? (y/n) \x1b[0m`
+      );
+      if (
+        overWriteMainQ.toLowerCase() === "y" ||
+        overWriteMainQ.toLowerCase() === "yes"
+      ) {
+        overWriteMain = true;
+      }
+    }
+    if (!parentComment.length || parentComment === "(null)" || overWriteMain) {
       parentComment = readlineSync.question(
         `\x1b[33mPlease add a description for this directory: \x1b[0m`
+      );
+    } else {
+      console.log(
+        "\x1b[32mCurrent directory details:\x1b[34m",
+        parentComment,
+        "\x1b[0m"
       );
     }
 
     //parentComment = parentComment.replace(/[\\$'"]/g, "\\$&");
+    parentComment = "DESCRIPTION:\n" + parentComment;
     headerContent = wordwrap(parentComment, {
       width: 50,
       indent: "",
@@ -189,7 +228,7 @@ if (!help) {
         !force &&
         !emptyComment
       ) {
-        console.log("\x1b[34mCurrent details:", termComment, "\x1b[0m");
+        console.log("\x1b[32mCurrent details:\x1b[34m", termComment, "\x1b[0m");
         if (!useCurrent) {
           var overWriteQ = readlineSync.question(
             `\x1b[31mWARING: Comment already exists, would you like to overwite? (y/n) \x1b[0m`
