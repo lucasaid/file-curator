@@ -4,7 +4,9 @@ A Node script that generates a list of files in the current directory and stores
 
 Example Output: [file-listing.txt](https://github.com/lucasaid/file-curator/blob/master/test-directory/file-listing.txt)
 
-## USAGE
+## USAGE  
+
+Install `npm install -g file-curator`  
 
 Run `file-curator` in current directory you wish to catalogue and you will be prompted to enter details.
 
