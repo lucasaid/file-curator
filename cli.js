@@ -11,6 +11,11 @@ const { execSync } = require("child_process");
 const fsUtils = require("nodejs-fs-utils");
 const columnify = require("columnify");
 
+const currentFile = require("./scripts/currentFile");
+const getDescription = require("./scripts/getDescription");
+const help = require("./scripts/help");
+const { formatSizeUnits, compareFiles } = require("./scripts/helpers");
+
 var data = [];
 const CURRENT = process.cwd();
 let FILELISTNAME = "file-listing.txt";
@@ -19,7 +24,7 @@ let FILELISTNAME = "file-listing.txt";
 const force = process.argv.indexOf("-f") > -1 ? true : false;
 const useCurrent = process.argv.indexOf("-u") > -1 ? true : false;
 const emptyComment = process.argv.indexOf("-e") > -1 ? true : false;
-const help = process.argv.indexOf("-help") > -1 ? true : false;
+const helpFlag = process.argv.indexOf("-help") > -1 ? true : false;
 const apple = process.argv.indexOf("-a") > -1 ? true : false;
 const dirsize = process.argv.indexOf("-d") > -1 ? true : false;
 
@@ -29,58 +34,9 @@ if (nameIndex > -1) {
   FILELISTNAME = process.argv[nameIndex + 1] + ".txt";
 }
 
-if (!help) {
+if (!helpFlag) {
   console.log("\x1b[32m%s\x1b[0m", `Generating file list for ${process.cwd()}`);
 
-  function currentFile(file) {
-    let fileData = fs.readFileSync(file, "utf8");
-    let fileLines = fileData.split("\n");
-    let headerIndex = fileLines.findIndex(function(fileLine) {
-      return (
-        fileLine.match(/NAME/g) &&
-        fileLine.match(/DATE/g) &&
-        fileLine.match(/SIZE/g) &&
-        fileLine.match(/DESCRIPTION/g)
-      );
-    });
-    fileLines.splice(0, headerIndex + 1);
-    fileList = [];
-    let previous = null;
-    fileLines.map(function(fileLine) {
-      let fileLineArray = fileLine.split("  |  ");
-      let name = fileLineArray[0].trim();
-      let description = fileLineArray[3].trim();
-      if (name !== "") {
-        previous = name;
-        fileList[name] = description;
-      } else {
-        fileList[previous] = fileList[previous] + " " + description;
-      }
-    });
-    return fileList;
-  }
-  function getDescription(file) {
-    let fileData = fs.readFileSync(file, "utf8");
-    let desc = fileData.match(/DESCRIPTION([\S\s]*?)\*\*\*/gi);
-    if (desc && desc[0]) {
-      let fileLineArray = desc[0].split(/\*\n/gi);
-      fileLineArray.shift();
-      fileLineArray.pop();
-      let newDesc = fileLineArray.map(function(line) {
-        line = line.replace(/\*/g, "");
-        line = line.trim();
-        return line;
-      });
-      newDesc = newDesc.join(" ");
-      return newDesc;
-    } else {
-      return "";
-    }
-  }
-
-  function compareFiles(a, b) {
-    return b.isDir - a.isDir || a.name > b.name ? 1 : -1;
-  }
   function genLine(file, description) {
     return {
       name: file.name,
@@ -89,22 +45,7 @@ if (!help) {
       description
     };
   }
-  function formatSizeUnits(bytes) {
-    if (bytes >= 1073741824) {
-      bytes = (bytes / 1073741824).toFixed(2) + " GB";
-    } else if (bytes >= 1048576) {
-      bytes = (bytes / 1048576).toFixed(2) + " MB";
-    } else if (bytes >= 1024) {
-      bytes = (bytes / 1024).toFixed(2) + " KB";
-    } else if (bytes > 1) {
-      bytes = bytes + " bytes";
-    } else if (bytes == 1) {
-      bytes = bytes + " byte";
-    } else {
-      bytes = "0 bytes";
-    }
-    return bytes;
-  }
+
   let header = [];
   headerTop =
     "*****************************************************************\n";
@@ -314,51 +255,5 @@ if (!help) {
     }
   }
 } else {
-  console.log("***** FILE CURATOR *****");
-  console.log("");
-  console.log(
-    "File curator genertates a file-listing.txt file that will index and catalogue all files in the current directory, allowing you to have a master file that displays relevant information for each file. Sub-directories are also included."
-  );
-  console.log("");
-  console.log("Usage: file-curator [options] [arguments]");
-  console.log("");
-  data = [
-    {
-      option: "-n [filename]",
-      description: "Use custom named text file."
-    },
-    {
-      option: "-f",
-      description: "Force re-write for all files."
-    },
-    {
-      option: "-u",
-      description:
-        "If there is description currently assigned to the file, skip asking to overwrite and use current."
-    },
-    {
-      option: "-e",
-      description: "Generates empty comment and just generates file list."
-    },
-    {
-      option: "-a",
-      description: "Sync with apple finder."
-    },
-    {
-      option: "-d",
-      description:
-        "Calculate directory file size, can be slow depending on how big the directory is."
-    },
-    {
-      option: "-help",
-      description: "Brings up this help text."
-    }
-  ];
-  var columns = columnify(data, {
-    columnSplitter: "   ",
-    config: {
-      description: { maxWidth: 50 }
-    }
-  });
-  console.log(columns);
+  help();
 }
