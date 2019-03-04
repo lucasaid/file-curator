@@ -18,5 +18,14 @@ const formatSizeUnits = bytes => {
 const compareFiles = (a, b) => {
   return b.isDir - a.isDir || a.name > b.name ? 1 : -1;
 };
-const helpers = { formatSizeUnits, compareFiles };
+
+const genLine = (file, description) => {
+  return {
+    name: file.name,
+    date: file.date,
+    size: file.size,
+    description
+  };
+};
+const helpers = { formatSizeUnits, compareFiles, genLine };
 module.exports = helpers;
