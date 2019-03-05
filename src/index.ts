@@ -16,6 +16,10 @@ import help from "./scripts/help";
 import styleText from "./scripts/styleText";
 import { formatSizeUnits, compareFiles, genLine } from "./scripts/helpers";
 
+// Clear screen
+process.stdout.write("\x1b[2J");
+process.stdout.write("\x1b[0f");
+
 let data: any = [];
 const CURRENT = process.cwd();
 let FILELISTNAME = "file-listing.txt";
@@ -31,8 +35,8 @@ const helpFlag =
     : false;
 const apple = process.argv.indexOf("-a") > -1 ? true : false;
 const dirsize = process.argv.indexOf("-d") > -1 ? true : false;
-
 const nameIndex = process.argv.indexOf("-n");
+
 if (nameIndex > -1) {
   FILELISTNAME = process.argv[nameIndex + 1] + ".txt";
 }
