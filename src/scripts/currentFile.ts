@@ -1,5 +1,7 @@
 import fs from "fs";
-const currentFile = (file: string) => {
+import { currentFiles } from "./helpers";
+
+const currentFile = (file: string): currentFiles => {
   let fileData = fs.readFileSync(file, "utf8");
   let fileLines = fileData.split("\n");
   let headerIndex = fileLines.findIndex(fileLine => {
@@ -14,8 +16,8 @@ const currentFile = (file: string) => {
     return false;
   });
   fileLines.splice(0, headerIndex + 1);
-  let fileList: any = [];
-  let previous: any = null;
+  let fileList: currentFiles | any = [];
+  let previous: string;
   fileLines.map(fileLine => {
     let fileLineArray = fileLine.split("  |  ");
     let name = fileLineArray[0].trim();

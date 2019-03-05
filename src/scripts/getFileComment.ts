@@ -1,5 +1,4 @@
-import styleText from "./styleText";
-
+import { styleText, commentData } from "./helpers";
 import { execSync } from "child_process";
 import readlineSync from "readline-sync";
 const getFileComment = (
@@ -9,7 +8,7 @@ const getFileComment = (
   emptyComment: boolean,
   useCurrent: boolean,
   apple: boolean
-) => {
+): commentData => {
   let fileComment = execSync(
     `mdls -name kMDItemFinderComment -raw "${file.path}"`
   ).toString();

@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import readlineSync from "readline-sync";
 import getDescription from "./getDescription";
 
-import styleText from "./styleText";
+import { styleText } from "./helpers";
 const getParentComment = (
   CURRENT: string,
   FILELISTNAME: string,
