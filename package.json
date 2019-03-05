@@ -1,7 +1,21 @@
 {
   "name": "file-curator",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Generate list of files in a text file of directory",
+  "keywords": [
+    "files",
+    "generator",
+    "curator",
+    "organisation",
+    "organise"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasaid/file-curator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lucasaid/file-curator/issues"
+  },
   "main": "./lib/index.js",
   "scripts": {
     "create": "yarn run build && yarn run test",
