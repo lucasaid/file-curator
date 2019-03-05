@@ -1,19 +1,22 @@
-const fs = require("fs");
-const currentFile = file => {
+import fs from "fs";
+const currentFile = (file: string) => {
   let fileData = fs.readFileSync(file, "utf8");
   let fileLines = fileData.split("\n");
-  let headerIndex = fileLines.findIndex(function(fileLine) {
-    return (
+  let headerIndex = fileLines.findIndex(fileLine => {
+    if (
       fileLine.match(/NAME/g) &&
       fileLine.match(/DATE/g) &&
       fileLine.match(/SIZE/g) &&
       fileLine.match(/DESCRIPTION/g)
-    );
+    ) {
+      return true;
+    }
+    return false;
   });
   fileLines.splice(0, headerIndex + 1);
-  fileList = [];
-  let previous = null;
-  fileLines.map(function(fileLine) {
+  let fileList: any = [];
+  let previous: any = null;
+  fileLines.map(fileLine => {
     let fileLineArray = fileLine.split("  |  ");
     let name = fileLineArray[0].trim();
     let description = fileLineArray[3].trim();
@@ -26,4 +29,4 @@ const currentFile = file => {
   });
   return fileList;
 };
-module.exports = currentFile;
+export default currentFile;

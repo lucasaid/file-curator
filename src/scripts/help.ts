@@ -1,4 +1,4 @@
-const columnify = require("columnify");
+import columnify from "columnify";
 const help = () => {
   console.log("***** FILE CURATOR *****");
   console.log("");
@@ -8,7 +8,7 @@ const help = () => {
   console.log("");
   console.log("Usage: file-curator [options] [arguments]");
   console.log("");
-  data = [
+  const data = [
     {
       option: "-n [filename]",
       description: "Use custom named text file."
@@ -49,4 +49,4 @@ const help = () => {
   console.log(columns);
 };
 
-module.exports = help;
+export default help;

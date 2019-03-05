@@ -1,13 +1,17 @@
-const wordwrap = require("word-wrap");
-const { formatSizeUnits } = require("./helpers");
+import wordwrap from "word-wrap";
+import { formatSizeUnits } from "./helpers";
 
-const columnify = require("columnify");
-const dateFormat = require("dateformat");
-const genText = (data, parentComment, CURRENT, totalSize) => {
-  let header = [];
-  headerTop =
+import columnify from "columnify";
+import dateFormat from "dateformat";
+const genText = (
+  data: any,
+  parentComment: string,
+  CURRENT: string,
+  totalSize: number
+) => {
+  let headerTop =
     "*****************************************************************\n";
-  headerContent = wordwrap(parentComment, {
+  let headerContent: string[] | string = wordwrap(parentComment, {
     width: 50,
     indent: "",
     newline: "\n"
@@ -36,7 +40,7 @@ const genText = (data, parentComment, CURRENT, totalSize) => {
     return line.padEnd(64, " ") + "*";
   });
   headerContent = headerContent.join("\n");
-  header = headerTop + headerContent + "\n" + headerTop;
+  const header = headerTop + headerContent + "\n" + headerTop;
   var columns = columnify(data, {
     columnSplitter: "  |  ",
     config: {
@@ -45,4 +49,4 @@ const genText = (data, parentComment, CURRENT, totalSize) => {
   });
   return header + "\n" + columns;
 };
-module.exports = genText;
+export default genText;

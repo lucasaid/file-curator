@@ -1,5 +1,5 @@
-const styleText = (text, color) => {
-  const colors = {
+const styleText = (text: string, color: string) => {
+  const colors: any = {
     green: "\x1b[32m",
     red: "\x1b[31m",
     yellow: "\x1b[33m",
@@ -11,4 +11,4 @@ const styleText = (text, color) => {
 
   return `${colors[color]}${text}\x1b[0m`;
 };
-module.exports = styleText;
+export default styleText;

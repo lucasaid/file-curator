@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const util = require("util");
-const junk = require("junk");
-const dateFormat = require("dateformat");
-const { ignored } = require("./ignored.json");
-const readlineSync = require("readline-sync");
-const fsUtils = require("nodejs-fs-utils");
+import * as fs from "fs";
+import * as util from "util";
+import junk from "junk";
+import dateFormat from "dateformat";
+import { ignored } from "./ignored.json";
+import readlineSync from "readline-sync";
+import fsUtils from "nodejs-fs-utils";
 
-const getParentComment = require("./scripts/getParentComment");
-const getFileComment = require("./scripts/getFileComment");
-const currentFile = require("./scripts/currentFile");
-const genText = require("./scripts/genText");
-const help = require("./scripts/help");
-const styleText = require("./scripts/styleText");
-const { formatSizeUnits, compareFiles, genLine } = require("./scripts/helpers");
+import getParentComment from "./scripts/getParentComment";
+import getFileComment from "./scripts/getFileComment";
+import currentFile from "./scripts/currentFile";
+import genText from "./scripts/genText";
+import help from "./scripts/help";
+import styleText from "./scripts/styleText";
+import { formatSizeUnits, compareFiles, genLine } from "./scripts/helpers";
 
-var data = [];
+let data: any = [];
 const CURRENT = process.cwd();
 let FILELISTNAME = "file-listing.txt";
 
@@ -39,15 +39,16 @@ if (nameIndex > -1) {
 
 if (helpFlag) {
   help();
-  return;
+  process.exit();
 }
 
 console.log(styleText(`Generating file list for ${process.cwd()}`, "green"));
 
-let currentFileData = [];
+let currentFileData: any = [];
+let fileExists;
 if (fs.existsSync(`${CURRENT}/${FILELISTNAME}`)) {
   currentFileData = currentFile(`${CURRENT}/${FILELISTNAME}`);
-  var fileExists = readlineSync.question(
+  fileExists = readlineSync.question(
     styleText(`WARING: ${FILELISTNAME} already exists, continue? (y/n)`, "red")
   );
 }
@@ -66,8 +67,8 @@ if (
   );
   parentComment = "DESCRIPTION:\n" + parentComment;
 
-  let files = fs.readdirSync(CURRENT);
-  files = files.filter(function(item) {
+  let files: any = fs.readdirSync(CURRENT);
+  files = files.filter(function(item: any) {
     let junked = junk.not(item);
     if (!junked) {
       return false;
@@ -84,15 +85,15 @@ if (
     return true;
   });
 
-  let totalSize = 0;
+  let totalSize: any = 0;
   files = files
-    .map(item => {
+    .map((item: any) => {
       const path = `${CURRENT}/${item}`;
       const stats = fs.lstatSync(path);
       const isDir = stats.isDirectory();
-      let date = new Date(util.inspect(stats.mtime));
+      let date: any = new Date(util.inspect(stats.mtime));
       date = dateFormat(date, "yyyy-mm-dd H:MM:ss");
-      let size = formatSizeUnits(stats.size);
+      let size: any = formatSizeUnits(stats.size);
       if (isDir && dirsize) {
         size = fsUtils.fsizeSync(path);
         totalSize += size;
@@ -111,7 +112,7 @@ if (
     })
     .sort(compareFiles);
 
-  files.forEach(function(file, index) {
+  files.forEach(function(file: any, index: number) {
     let commentData = getFileComment(
       file,
       currentFileData,

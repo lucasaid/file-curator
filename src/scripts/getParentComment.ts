@@ -1,9 +1,14 @@
-const { execSync } = require("child_process");
-const readlineSync = require("readline-sync");
-const getDescription = require("./getDescription");
+import { execSync } from "child_process";
+import readlineSync from "readline-sync";
+import getDescription from "./getDescription";
 
-const styleText = require("./styleText");
-const getParentComment = (CURRENT, FILELISTNAME, useCurrent, apple) => {
+import styleText from "./styleText";
+const getParentComment = (
+  CURRENT: string,
+  FILELISTNAME: string,
+  useCurrent: boolean,
+  apple: boolean
+) => {
   let parentComment = "";
   if (apple) {
     parentComment = execSync(
@@ -18,7 +23,7 @@ const getParentComment = (CURRENT, FILELISTNAME, useCurrent, apple) => {
   if (!parentComment.length || parentComment === "(null)") {
     parentComment = getDescription(`${CURRENT}/${FILELISTNAME}`);
   }
-  overWriteMain = false;
+  let overWriteMain = false;
   if (parentComment.length && parentComment !== "(null)" && !useCurrent) {
     var overWriteMainQ = readlineSync.question(
       styleText(
@@ -46,4 +51,4 @@ const getParentComment = (CURRENT, FILELISTNAME, useCurrent, apple) => {
   return parentComment;
 };
 
-module.exports = getParentComment;
+export default getParentComment;

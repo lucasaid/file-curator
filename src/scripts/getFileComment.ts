@@ -1,14 +1,14 @@
-const styleText = require("./styleText");
+import styleText from "./styleText";
 
-const { execSync } = require("child_process");
-const readlineSync = require("readline-sync");
+import { execSync } from "child_process";
+import readlineSync from "readline-sync";
 const getFileComment = (
-  file,
-  currentFileData,
-  force,
-  emptyComment,
-  useCurrent,
-  apple
+  file: any,
+  currentFileData: any,
+  force: boolean,
+  emptyComment: boolean,
+  useCurrent: boolean,
+  apple: boolean
 ) => {
   let fileComment = execSync(
     `mdls -name kMDItemFinderComment -raw "${file.path}"`
@@ -78,4 +78,5 @@ const getFileComment = (
   }
   return { fileComment, overWrite };
 };
-module.exports = getFileComment;
+
+export default getFileComment;

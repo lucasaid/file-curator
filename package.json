@@ -2,14 +2,18 @@
   "name": "file-curator",
   "version": "1.2.1",
   "description": "Generate list of files in a text file of directory",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "create": "npm run build && npm run test",
+    "build": "tsc -p .",
+    "test": "sudo npm i -g && file-curator",
+    "refresh": "rm -rf ./node_modules ./package-lock.json && npm install"
   },
   "author": "Chris Lucas",
   "license": "MIT",
   "bin": {
-    "file-curator": "./cli.js"
+    "file-curator": "./lib/index.js"
   },
   "dependencies": {
     "columnify": "^1.5.4",
@@ -18,5 +22,14 @@
     "nodejs-fs-utils": "^1.1.2",
     "readline-sync": "^1.4.9",
     "word-wrap": "^1.2.3"
+  },
+  "devDependencies": {
+    "@types/dateformat": "^3.0.0",
+    "@types/junk": "^2.1.0",
+    "@types/node": "^11.10.4",
+    "@types/readline-sync": "^1.4.3",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
   }
 }
