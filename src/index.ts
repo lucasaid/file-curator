@@ -8,6 +8,7 @@ import dateFormat from "dateformat";
 import { ignored } from "./ignored.json";
 import readlineSync from "readline-sync";
 import fsUtils from "nodejs-fs-utils";
+import path from "path";
 
 // Local Imports
 import getParentComment from "./scripts/getParentComment";
@@ -15,10 +16,12 @@ import getFileComment from "./scripts/getFileComment";
 import currentFile from "./scripts/currentFile";
 import genText from "./scripts/genText";
 import help from "./scripts/help";
+import getMovieData from "./scripts/getMovieData";
 import {
   formatSizeUnits,
   compareFiles,
   genLine,
+  genMovie,
   fileObj,
   fileLine,
   commentData,
@@ -46,7 +49,9 @@ const helpFlag: boolean =
     : false;
 const apple: boolean = process.argv.indexOf("-a") > -1 ? true : false;
 const dirsize: boolean = process.argv.indexOf("-d") > -1 ? true : false;
+const movie: boolean = process.argv.indexOf("-m") > -1 ? true : false;
 const nameIndex: number = process.argv.indexOf("-n");
+let OMDB_API = "ea2df100";
 
 if (nameIndex > -1) {
   FILELISTNAME = process.argv[nameIndex + 1] + ".txt";
@@ -59,7 +64,7 @@ if (helpFlag) {
 
 log(styleText(`Generating file list for ${process.cwd()}`, "green"));
 
-let currentFileData: string[] = [];
+let currentFileData: any;
 let fileExists;
 if (fs.existsSync(`${CURRENT}/${FILELISTNAME}`)) {
   currentFileData = currentFile(`${CURRENT}/${FILELISTNAME}`);
@@ -135,15 +140,59 @@ if (
     .sort(compareFiles);
 
   files.forEach(function(file: fileObj) {
-    let commentData: commentData = getFileComment(
-      file,
-      currentFileData,
-      force,
-      emptyComment,
-      useCurrent,
-      apple
-    );
-    data.push(genLine(file, commentData.fileComment));
+    let movieData: any;
+    let commentData: commentData;
+    if (movie) {
+      let videoArray: Array<string> = [".avi", ".mp4", ".mov"];
+      let ext = path.extname(file.name);
+      if (videoArray.includes(ext)) {
+        movieData = getMovieData(file.name, OMDB_API);
+        if (!movieData) {
+          console.log(styleText(`Filename: ${file.name}`, "blue"));
+          var manualsearch = readlineSync.question(
+            styleText(
+              `WARING: Movie not found, would you like to manual search? (y/n) `,
+              "red"
+            )
+          );
+          if (
+            manualsearch.toLowerCase() === "y" ||
+            manualsearch.toLowerCase() === "yes"
+          ) {
+            let movieTitle = readlineSync.question(
+              styleText(`Movie not found please enter movie title: `, "yellow")
+            );
+            let movieYear = readlineSync.question(
+              styleText(`Movie not found please enter movie year: `, "yellow")
+            );
+            movieData = getMovieData(movieTitle, OMDB_API, true, movieYear);
+          }
+        }
+      }
+    }
+    if (movieData && movieData.Plot) {
+      commentData = movieData.Plot;
+      data.push(genMovie(file, movieData.Plot, movieData));
+    } else {
+      commentData = getFileComment(
+        file,
+        currentFileData,
+        force,
+        emptyComment,
+        useCurrent,
+        apple
+      );
+      if (
+        currentFileData[file.name].year &&
+        currentFileData[file.name].rating
+      ) {
+        data.push(
+          genMovie(file, commentData.fileComment, currentFileData[file.name])
+        );
+      } else {
+        data.push(genLine(file, commentData.fileComment));
+      }
+    }
     if (commentData.overWrite && !emptyComment) {
       log(
         styleText(`✔ New File details are: ${commentData.fileComment}`, "green")

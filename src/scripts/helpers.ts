@@ -10,6 +10,8 @@ export interface fileLine {
   date: string;
   size: string;
   description: string;
+  year?: string;
+  rating?: string;
 }
 
 export interface commentData {
@@ -42,7 +44,28 @@ export const formatSizeUnits = (bytes: number): string => {
 export const compareFiles = (a: fileObj, b: fileObj): number => {
   return (b.isDir ? 1 : 0) - (a.isDir ? 1 : 0) || a.name > b.name ? 1 : -1;
 };
-
+export const genMovie = (
+  file: fileObj,
+  description: string,
+  movieData: any
+): any => {
+  let rating = movieData.rating;
+  let year = movieData.year;
+  if (movieData.Ratings) {
+    rating = movieData.Ratings.filter(
+      (rating: any) => rating.Source === "Rotten Tomatoes"
+    )[0].Value;
+    year = movieData.Year;
+  }
+  return {
+    name: file.name,
+    date: file.date,
+    size: file.size,
+    description,
+    year,
+    rating
+  };
+};
 export const genLine = (file: fileObj, description: string): fileLine => {
   return {
     name: file.name,

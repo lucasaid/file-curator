@@ -17,8 +17,13 @@ const getFileComment = (
       `sh ${__dirname}/applescript/get_comment.sh "${file.path}"`
     ).toString();
   }
-  if (currentFileData[file.name] && currentFileData[file.name] != "") {
-    fileComment = currentFileData[file.name];
+  if (
+    currentFileData &&
+    currentFileData[file.name] &&
+    currentFileData[file.name].desc &&
+    currentFileData[file.name].desc != ""
+  ) {
+    fileComment = currentFileData[file.name].desc;
   }
   let overWrite = false;
   console.log(

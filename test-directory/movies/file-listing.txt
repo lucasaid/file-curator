@@ -1,0 +1,25 @@
+*****************************************************************
+*                                                               *
+*      FILE CREATED: 2019-03-29 12:59:27                        *
+*                                                               *
+*      TOTAL SIZE: 0 bytes                                      *
+*                                                               *
+*      FULL PATH: /Users/chrislucas/code/node/file-curato       *
+*      r/test-directory/movies                                  *
+*                                                               *
+*      DESCRIPTION:                                             *
+*      My Movies Backup                                         *
+*                                                               *
+*****************************************************************
+
+NAME                                           |  DATE                 |  SIZE     |  DESCRIPTION                                         |  YEAR  |  RATING
+A.Nightmare.on.Elm.Street.1984.720p.HeyDL.mp4  |  2019-03-27 16:53:32  |  0 bytes  |  The monstrous spirit of a slain janitor seeks       |  1984  |  94%   
+                                               |                       |           |  revenge by invading the dreams of teenagers whose   |        |        
+                                               |                       |           |  parents were responsible for his untimely death.    |        |        
+Blade Runner 2049.2017.1080p.XVID.mp4          |  2019-03-27 16:53:32  |  0 bytes  |  A young blade runner's discovery of a long-buried   |  2017  |  87%   
+                                               |                       |           |  secret leads him to track down former blade runner  |        |        
+                                               |                       |           |  Rick Deckard, who's been missing for thirty years.  |        |        
+Blade Runner 2049.2017.1080p.XVID.srt          |  2019-02-16 20:00:39  |  0 bytes  |  Blade Runner subtitles - English                    |        |        
+Blade Runner.1080p.XVID.mp4                    |  2019-03-27 16:53:32  |  0 bytes  |  A blade runner must pursue and terminate four       |  1982  |  90%   
+                                               |                       |           |  replicants who stole a ship in space, and have      |        |        
+                                               |                       |           |  returned to Earth to find their creator.            |        |        

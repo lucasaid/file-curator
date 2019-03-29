@@ -9,7 +9,9 @@ const currentFile = (file: string): currentFiles => {
       fileLine.match(/NAME/g) &&
       fileLine.match(/DATE/g) &&
       fileLine.match(/SIZE/g) &&
-      fileLine.match(/DESCRIPTION/g)
+      fileLine.match(/DESCRIPTION/g) &&
+      fileLine.match(/YEAR/g) &&
+      fileLine.match(/RATING/g)
     ) {
       return true;
     }
@@ -22,11 +24,20 @@ const currentFile = (file: string): currentFiles => {
     let fileLineArray = fileLine.split("  |  ");
     let name = fileLineArray[0].trim();
     let description = fileLineArray[3].trim();
+    let year = fileLineArray[4].trim();
+    let rating = fileLineArray[5].trim();
     if (name !== "") {
       previous = name;
-      fileList[name] = description;
+      fileList[name] = {
+        desc: ""
+      };
+      fileList[name].desc = description;
+      if (year != "") {
+        fileList[name].year = year;
+        fileList[name].rating = rating;
+      }
     } else {
-      fileList[previous] = fileList[previous] + " " + description;
+      fileList[previous].desc = fileList[previous].desc + " " + description;
     }
   });
   return fileList;

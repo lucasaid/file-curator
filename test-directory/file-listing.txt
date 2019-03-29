@@ -1,11 +1,10 @@
 *****************************************************************
 *                                                               *
-*      FILE CREATED: 2019-03-05 7:55:59                         *
+*      FILE CREATED: 2019-03-29 12:33:21                        *
 *                                                               *
-*      TOTAL SIZE: 96 bytes                                     *
+*      TOTAL SIZE: 256 bytes                                    *
 *                                                               *
-*      FULL PATH: /Users/chrislucas/code/file-curator/tes       *
-*      t-directory                                              *
+*      FULL PATH: /file-curator/test-directory                  *
 *                                                               *
 *      DESCRIPTION:                                             *
 *      This is a test directory to show you how the             *
@@ -13,7 +12,7 @@
 *                                                               *
 *****************************************************************
 
-NAME          |  DATE                 |  SIZE      |  DESCRIPTION                         
-movies/       |  2019-02-16 21:16:04  |  96 bytes  |  Home Movies Directory               
-document.txt  |  2019-02-16 20:00:39  |  0 bytes   |  Document with important information.
-image.gif     |  2019-02-16 21:10:22  |  0 bytes   |  Funny animated gif.                 
+NAME          |  DATE                 |  SIZE       |  DESCRIPTION                         
+movies/       |  2019-03-29 12:32:06  |  256 bytes  |  Home Movies Directory               
+document.txt  |  2019-02-16 20:00:39  |  0 bytes    |  Document with important information.
+image.gif     |  2019-02-16 21:10:22  |  0 bytes    |  Funny animated gif.                 
