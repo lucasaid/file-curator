@@ -4,9 +4,9 @@ A Node script that generates a list of files in the current directory and stores
 
 Example Output: [file-listing.txt](https://github.com/lucasaid/file-curator/blob/master/test-directory/file-listing.txt)
 
-## USAGE  
+## USAGE
 
-Install `npm install -g file-curator`  
+Install `npm install -g file-curator`
 
 Run `file-curator` in current directory you wish to catalogue and you will be prompted to enter details.
 
@@ -23,3 +23,7 @@ Run `file-curator` in current directory you wish to catalogue and you will be pr
 #### Mac Users Note:
 
 If on a Mac OS, the script will attempt to grab and set any comments attached to the file using finder if the `-a` flag is set.
+
+#### MOVIE BRANCH:
+
+`-m` will search OMDb of movie files to get the plot year and rottern tomatoes rating, you need to create an .env file based on .env-example, and register for an API at http://www.omdbapi.com/apikey.aspx
