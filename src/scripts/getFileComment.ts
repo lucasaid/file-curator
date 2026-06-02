@@ -1,5 +1,6 @@
 import { styleText, commentData } from "./helpers";
-import { execSync } from "child_process";
+import { execSync, execFileSync } from "child_process";
+import * as path from "path";
 import readlineSync from "readline-sync";
 const getFileComment = (
   file: any,
@@ -9,13 +10,17 @@ const getFileComment = (
   useCurrent: boolean,
   apple: boolean
 ): commentData => {
-  let fileComment = execSync(
-    `mdls -name kMDItemFinderComment -raw "${file.path}"`
-  ).toString();
-  if ((!fileComment.length || fileComment === "(null)") && apple) {
-    fileComment = execSync(
-      `sh ${__dirname}/applescript/get_comment.sh "${file.path}"`
-    ).toString();
+  let fileComment = "";
+  if (apple) {
+    try {
+      fileComment = execFileSync("mdls", ["-name", "kMDItemFinderComment", "-raw", file.path]).toString();
+    } catch {
+      fileComment = "";
+    }
+    if (!fileComment.length || fileComment === "(null)") {
+      const scriptPath = path.join(__dirname, "../../applescript/get_comment.sh");
+      fileComment = execFileSync("sh", [scriptPath, file.path]).toString();
+    }
   }
   if (currentFileData[file.name] && currentFileData[file.name] != "") {
     fileComment = currentFileData[file.name];
@@ -64,16 +69,14 @@ const getFileComment = (
     fileComment = "";
   }
   if (apple) {
-    execSync(
-      `xattr -w com.apple.metadata:kMDItemFinderComment "${fileComment}" "${
-        file.path
-      }"`
-    );
-    execSync(
-      `sh ${__dirname}/applescript/update_finder.sh "${
-        file.path
-      }" "${fileComment}"`
-    );
+    execFileSync("xattr", [
+      "-w",
+      "com.apple.metadata:kMDItemFinderComment",
+      fileComment,
+      file.path
+    ]);
+    const updateScript = path.join(__dirname, "../../applescript/update_finder.sh");
+    execFileSync("sh", [updateScript, file.path, fileComment]);
   }
   return { fileComment, overWrite };
 };

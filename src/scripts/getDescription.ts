@@ -1,5 +1,9 @@
-const fs = require("fs");
-const getDescription = (file: any) => {
+import * as fs from "fs";
+
+const getDescription = (file: string): string => {
+  if (!fs.existsSync(file)) {
+    return "";
+  }
   let fileData = fs.readFileSync(file, "utf8");
   let desc = fileData.match(/DESCRIPTION([\S\s]*?)\*\*\*/gi);
   if (desc && desc[0]) {
@@ -11,8 +15,7 @@ const getDescription = (file: any) => {
       line = line.trim();
       return line;
     });
-    newDesc = newDesc.join(" ");
-    return newDesc;
+    return newDesc.join(" ");
   } else {
     return "";
   }

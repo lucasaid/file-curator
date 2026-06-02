@@ -16,11 +16,20 @@
   "bugs": {
     "url": "https://github.com/lucasaid/file-curator/issues"
   },
+  "files": [
+    "lib/",
+    "applescript/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "main": "./lib/index.js",
   "scripts": {
-    "create": "yarn run build && yarn run test",
+    "prepare": "tsc -p .",
+    "create": "pnpm run build && pnpm run test",
     "build": "tsc -p .",
-    "refresh": "rm -rf ./node_modules ./package-lock.json && yarn install"
+    "refresh": "rm -rf ./node_modules ./pnpm-lock.yaml && pnpm install"
   },
   "author": "Chris Lucas",
   "license": "MIT",
@@ -28,19 +37,19 @@
     "file-curator": "./lib/index.js"
   },
   "dependencies": {
-    "columnify": "^1.5.4",
+    "columnify": "^1.6.0",
     "dateformat": "^3.0.3",
     "junk": "^2.1.0",
-    "nodejs-fs-utils": "^1.1.2",
-    "readline-sync": "^1.4.9",
-    "word-wrap": "^1.2.3"
+    "nodejs-fs-utils": "^1.2.6",
+    "readline-sync": "^1.4.10",
+    "word-wrap": "^1.2.5"
   },
   "devDependencies": {
-    "@types/dateformat": "^3.0.0",
+    "@types/dateformat": "^3.0.1",
     "@types/junk": "^2.1.0",
-    "@types/node": "^11.10.4",
-    "@types/readline-sync": "^1.4.3",
-    "ts-node": "^8.0.2",
-    "typescript": "^3.3.3333"
+    "@types/node": "^18.0.0",
+    "@types/readline-sync": "^1.4.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
   }
 }

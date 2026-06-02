@@ -1,2 +1,2 @@
-declare const getDescription: (file: any) => any;
+declare const getDescription: (file: string) => string;
 export default getDescription;

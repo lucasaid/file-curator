@@ -22,6 +22,7 @@ import {
   fileObj,
   fileLine,
   commentData,
+  currentFiles,
   styleText
 } from "./scripts/helpers";
 
@@ -59,7 +60,7 @@ if (helpFlag) {
 
 log(styleText(`Generating file list for ${process.cwd()}`, "green"));
 
-let currentFileData: string[] = [];
+let currentFileData: currentFiles = {};
 let fileExists;
 if (fs.existsSync(`${CURRENT}/${FILELISTNAME}`)) {
   currentFileData = currentFile(`${CURRENT}/${FILELISTNAME}`);

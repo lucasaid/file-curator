@@ -1,4 +1,6 @@
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
+import * as fs from "fs";
+import * as path from "path";
 import readlineSync from "readline-sync";
 import getDescription from "./getDescription";
 
@@ -11,17 +13,19 @@ const getParentComment = (
 ) => {
   let parentComment = "";
   if (apple) {
-    parentComment = execSync(
-      `mdls -name kMDItemFinderComment -raw "${CURRENT}"`
-    ).toString();
+    try {
+      parentComment = execFileSync("mdls", ["-name", "kMDItemFinderComment", "-raw", CURRENT]).toString();
+    } catch {
+      parentComment = "";
+    }
     if (!parentComment.length || parentComment === "(null)") {
-      parentComment = execSync(
-        `sh ${__dirname}/applescript/get_comment.sh "${CURRENT}"`
-      ).toString();
+      const scriptPath = path.join(__dirname, "../../applescript/get_comment.sh");
+      parentComment = execFileSync("sh", [scriptPath, CURRENT]).toString();
     }
   }
+  const listingPath = `${CURRENT}/${FILELISTNAME}`;
   if (!parentComment.length || parentComment === "(null)") {
-    parentComment = getDescription(`${CURRENT}/${FILELISTNAME}`);
+    parentComment = fs.existsSync(listingPath) ? getDescription(listingPath) : "";
   }
   let overWriteMain = false;
   if (parentComment.length && parentComment !== "(null)" && !useCurrent) {
