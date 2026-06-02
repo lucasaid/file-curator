@@ -60,6 +60,12 @@ if (helpFlag) {
 
 log(styleText(`Generating file list for ${process.cwd()}`, "green"));
 
+// Read piped stdin as the directory description when -e is set
+let pipedDescription: string | undefined;
+if (emptyComment && !process.stdin.isTTY) {
+  pipedDescription = fs.readFileSync(0, "utf8").trim();
+}
+
 let currentFileData: currentFiles = {};
 let fileExists;
 if (fs.existsSync(`${CURRENT}/${FILELISTNAME}`)) {
@@ -75,12 +81,9 @@ if (
   (typeof fileExists !== "undefined" &&
     (fileExists.toLowerCase() === "y" || fileExists.toLowerCase() === "yes"))
 ) {
-  let parentComment = getParentComment(
-    CURRENT,
-    FILELISTNAME,
-    useCurrent,
-    apple
-  );
+  let parentComment = pipedDescription !== undefined
+    ? pipedDescription
+    : getParentComment(CURRENT, FILELISTNAME, useCurrent, apple);
   parentComment = "DESCRIPTION:\n" + parentComment;
 
   let rawFiles: string[] = fs.readdirSync(CURRENT).filter((item: string) => {
